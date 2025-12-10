@@ -14,14 +14,17 @@ from uninformed_search import (
     BFS_with_metrics, DFS_with_metrics, UCS_with_metrics,
     DLS_with_metrics, IDS_with_metrics, Backtracking_with_metrics,
     Bidirectional_with_metrics, extract_path, path_cost_expression,
-    neighbors, distances, city_positions
 )
+
 
 from informed_search import (
     Greedy_Search, AStar_Search, IDAStar_Search, RBFS_Search,
     extract_path as informed_extract_path,
     path_cost_expression as informed_path_cost_expression,
-    neighbors as informed_neighbors
+)
+
+from romania_problem import (
+    neighbors, distances, city_positions
 )
 
 #GRAPH CANVAS
@@ -177,9 +180,7 @@ class UninformedWindow(QMainWindow):
         self.log.append(str(res))
 
 
-# ============================================================
-#                   INFORMED SEARCH WINDOW
-# ============================================================
+# INFORMED SEARCH WINDOW
 class InformedWindow(QMainWindow):
     switch_to_menu = Signal()
 
@@ -234,7 +235,7 @@ class InformedWindow(QMainWindow):
         start = self.start.text().strip()
         goal = self.goal.text().strip()
 
-        if start not in informed_neighbors or goal not in informed_neighbors:
+        if start not in neighbors or goal not in neighbors:
             QMessageBox.warning(self, "Error", "Invalid city")
             return
 
